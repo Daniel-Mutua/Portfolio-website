@@ -1,1 +1,570 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact — Daniel Mutua</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* HIDE SCROLLBAR COMPLETELY - FIXED */
+    html, body {
+      overflow: hidden;
+      height: 100%;
+    }
+    
+    body {
+      overflow-y: auto;
+    }
+    
+    ::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+      background: transparent;
+    }
+    
+    * {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0b0c10;
+      color: #c5c6c7;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    /* NAVBAR - WITH ALL LINKS */
+    nav {
+      width: 100%;
+      background: rgba(11,12,16,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,255,247,0.3);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 20px rgba(0,255,247,0.3);
+      box-sizing: border-box;
+    }
+
+    nav .logo {
+      color: #00fff7;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    nav ul::-webkit-scrollbar {
+      display: none;
+    }
+
+    nav ul li {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    nav ul li a {
+      color: #00fff7;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 5px 8px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      display: inline-block;
+    }
+
+    nav ul li a:hover {
+      color: #0b0c10;
+      background-color: #00fff7;
+      box-shadow: 0 0 8px rgba(0,255,247,0.7);
+      text-shadow: none;
+      border: 1px solid #00fff7;
+    }
+
+    /* Active link styling */
+    nav ul li a.active {
+      color: #00fff7;
+      border-bottom: 2px solid #00fff7;
+      padding-bottom: 3px;
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      color: #00fff7;
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 5px;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 700px;
+      margin: 90px auto 40px auto;
+      padding: 30px;
+      background: rgba(31,40,51,0.95);
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0,255,247,0.2);
+      border: 1px solid rgba(0,255,247,0.2);
+      backdrop-filter: blur(5px);
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .container h2 {
+      font-size: 2.2rem;
+      color: #00fff7;
+      margin-bottom: 20px;
+    }
+
+    .container p {
+      font-size: 1.1rem;
+      color: #c5c6c7;
+      margin-bottom: 50px;
+    }
+
+    /* MESSAGE FORM CONTAINER */
+    .message-container {
+      background: #1f2833;
+      padding: 50px 30px;
+      border-radius: 12px;
+      max-width: 500px;
+      height: 430px;
+      margin: 0 auto 80px auto;
+      box-shadow: 0 0 20px rgba(0,255,247,0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      height: 100%;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 15px;
+      border-radius: 8px;
+      border: none;
+      background: #0b0c10;
+      color: #c5c6c7;
+      font-size: 1rem;
+      resize: none;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: 2px solid #00fff7;
+    }
+
+    .contact-form button {
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      background: #00fff7;
+      color: #0b0c10;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      align-self: center;
+    }
+
+    .contact-form button:hover {
+      background: #0ff;
+    }
+
+    /* CONTACT METHODS ROW (bottom) - UPDATED FOR 4 ICONS */
+    .contact-methods {
+      display: flex;
+      justify-content: center;
+      gap: 40px; /* Reduced gap to fit 4 icons */
+      margin-top: 50px;
+      flex-wrap: wrap;
+    }
+
+    .contact-method {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: 0.3s;
+      min-width: 100px; /* Ensure consistent sizing */
+    }
+
+    .contact-method i {
+      font-size: 3.5rem;
+      color: #00fff7;
+      margin-bottom: 10px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .contact-method span, .contact-method a {
+      color: #c5c6c7;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .contact-method:hover i,
+    .contact-method:hover a,
+    .contact-method:hover span {
+      color: #0ff;
+      text-shadow: 0 0 8px #00fff7;
+    }
+
+    /* Twitter icon specific styling - blue color */
+    .contact-method .fa-twitter {
+      color: #00fff7; /* Default cyan to match theme */
+    }
+    
+    .contact-method:hover .fa-twitter {
+      color: #1DA1F2; /* Twitter blue on hover */
+      text-shadow: 0 0 8px rgba(29, 161, 242, 0.7);
+    }
+
+    /* COPYRIGHT FOOTER */
+    .copyright {
+      text-align: center;
+      padding: 25px 0;
+      margin-top: 50px;
+      border-top: 1px solid rgba(0,255,247,0.2);
+      color: #c5c6c7;
+      font-size: 0.9rem;
+      background: rgba(11,12,16,0.9);
+      width: 100%;
+    }
+
+    .copyright p {
+      margin: 0;
+      padding: 0;
+    }
+
+    .copyright a {
+      color: #00fff7;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .copyright a:hover {
+      color: #0ff;
+      text-shadow: 0 0 8px rgba(0,255,247,0.5);
+    }
+
+    .copyright .heart {
+      color: #ff4757;
+      animation: heartbeat 1.5s infinite;
+      display: inline-block;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      nav ul {
+        gap: 8px;
+      }
+      
+      nav ul li a {
+        font-size: 0.88rem;
+        padding: 4px 7px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      nav ul li a {
+        font-size: 0.86rem;
+        padding: 4px 6px;
+      }
+      
+      .contact-methods {
+        gap: 35px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      
+      nav {
+        padding: 10px 15px;
+        flex-wrap: wrap;
+      }
+      
+      nav ul {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(0,255,247,0.2);
+        overflow-x: visible;
+      }
+      
+      nav ul.active {
+        display: flex;
+      }
+      
+      nav ul li {
+        width: 100%;
+      }
+      
+      nav ul li a {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.95rem;
+      }
+      
+      .container {
+        margin: 100px 15px 30px 15px;
+        padding: 20px;
+      }
+      
+      .contact-methods {
+        gap: 25px;
+      }
+
+      .contact-method i {
+        font-size: 3rem;
+      }
+      
+      .contact-method {
+        min-width: 80px;
+      }
+      
+      .copyright {
+        padding: 20px 15px;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .contact-methods {
+        gap: 20px;
+      }
+      
+      .contact-method i {
+        font-size: 2.8rem;
+      }
+      
+      .contact-method span {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav .logo {
+        font-size: 1.2rem;
+      }
+      
+      .contact-methods {
+        gap: 15px;
+      }
+      
+      .contact-method {
+        min-width: 70px;
+      }
+      
+      .contact-method i {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR WITH ALL LINKS -->
+  <nav>
+    <div class="logo">Daniel Mutua</div>
+    
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <ul id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Skills.html">Skills</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="Resume.html">Resume</a></li>
+      <li><a href="Education.html">Education</a></li>
+      <li><a href="Contacts.html-section" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONTACT SECTION -->
+  <section class="container" id="contact-section">
+    <h2>CONTACT ME</h2>
+    <p>Send me a message directly or reach me via the platforms below.</p>
+
+    <!-- MESSAGE FORM -->
+    <div class="message-container">
+      <form class="contact-form">
+        <input type="text" placeholder="Your Good Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="10" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+
+    <!-- CONTACT METHODS - NOW WITH TWITTER -->
+    <div class="contact-methods">
+      <div class="contact-method">
+        <i class="fas fa-phone"></i>
+        <span>+254758010300</span>
+      </div>
+      <div class="contact-method">
+        <i class="fab fa-linkedin" onclick="window.open('https://www.linkedin.com/in/muthuimutua01/','_blank')"></i>
+        <span>LinkedIn</span>
+      </div>
+      <div class="contact-method">
+        <i class="fab fa-twitter" onclick="window.open('https://twitter.com/_babu_official','_blank')"></i>
+        <span>Twitter</span>
+      </div>
+      <div class="contact-method">
+        <i class="fab fa-github" onclick="window.open('https://github.com/Daniel-Mutua','_blank')"></i>
+        <span>GitHub</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- COPYRIGHT FOOTER -->
+  <footer class="copyright">
+    <p>
+      &copy; 2024 Daniel Mutua. All rights reserved. 
+      <span class="heart">❤</span> 
+      Built with passion and dedication.
+      <br>
+      <a href="mailto:contact@danielmutua.com">contact@muthuimutua00@gmail.com</a>
+    </p>
+  </footer>
+
+  <script>
+    // Form submission handler
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const name = this.querySelector('input[type="text"]').value;
+      const email = this.querySelector('input[type="email"]').value;
+      const message = this.querySelector('textarea').value;
+      
+      // Simple validation
+      if (name && email && message) {
+        // In a real application, you would send this data to a server
+        // For now, just show an alert
+        alert(`Thank you, ${name}! Your message has been sent. I'll get back to you soon at ${email}.`);
+        
+        // Reset form
+        this.reset();
+      } else {
+        alert('Please fill in all fields before submitting.');
+      }
+    });
+
+    // Make phone number clickable on mobile
+    document.querySelector('.fa-phone').addEventListener('click', function() {
+      window.open('tel:+254758010300');
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Set active nav link
+    const navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        navLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Close mobile menu after clicking
+        if (window.innerWidth <= 768) {
+          navMenu.classList.remove('active');
+        }
+      });
+    });
+
+    // Close menu when clicking outside (for mobile)
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && 
+          !navMenu.contains(e.target) && 
+          !menuToggle.contains(e.target)) {
+        navMenu.classList.remove('active');
+      }
+    });
+
+    // Force hide scrollbar with JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+      // Apply scrollbar hiding to all elements
+      const style = document.createElement('style');
+      style.textContent = `
+        *::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+        * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+      `;
+      document.head.appendChild(style);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId !== '#') {
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
