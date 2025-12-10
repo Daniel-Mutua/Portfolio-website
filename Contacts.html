@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +5,22 @@
   <title>Contact — Daniel Mutua</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Add EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  
   <style>
-    /* HIDE SCROLLBAR COMPLETELY - FIXED */
+    /* ---------------- BODY ---------------- */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0b0c10;
+      color: #c5c6c7;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* HIDE SCROLLBAR COMPLETELY */
     html, body {
       overflow: hidden;
       height: 100%;
@@ -27,15 +40,6 @@
     * {
       scrollbar-width: none;
       -ms-overflow-style: none;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #0b0c10;
-      color: #c5c6c7;
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth;
     }
 
     /* NAVBAR - WITH ALL LINKS */
@@ -206,11 +210,28 @@
       background: #0ff;
     }
 
-    /* CONTACT METHODS ROW (bottom) - UPDATED FOR 4 ICONS */
+    /* Style for loading state */
+    .contact-form button.loading {
+      background: #666;
+      cursor: not-allowed;
+    }
+
+    .contact-form button.loading::after {
+      content: '...';
+      animation: dots 1.5s infinite;
+    }
+
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60%, 100% { content: '...'; }
+    }
+
+    /* CONTACT METHODS ROW (bottom) */
     .contact-methods {
       display: flex;
       justify-content: center;
-      gap: 40px; /* Reduced gap to fit 4 icons */
+      gap: 40px;
       margin-top: 50px;
       flex-wrap: wrap;
     }
@@ -221,7 +242,7 @@
       align-items: center;
       text-align: center;
       transition: 0.3s;
-      min-width: 100px; /* Ensure consistent sizing */
+      min-width: 100px;
     }
 
     .contact-method i {
@@ -244,16 +265,6 @@
     .contact-method:hover span {
       color: #0ff;
       text-shadow: 0 0 8px #00fff7;
-    }
-
-    /* Twitter icon specific styling - blue color */
-    .contact-method .fa-twitter {
-      color: #00fff7; /* Default cyan to match theme */
-    }
-    
-    .contact-method:hover .fa-twitter {
-      color: #1DA1F2; /* Twitter blue on hover */
-      text-shadow: 0 0 8px rgba(29, 161, 242, 0.7);
     }
 
     /* COPYRIGHT FOOTER */
@@ -295,29 +306,46 @@
       50% { transform: scale(1.1); }
     }
 
+    /* Notification styles */
+    .notification {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      z-index: 10000;
+      animation: slideIn 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 350px;
+    }
+
+    .notification.success {
+      background: #1f2833;
+      color: #00fff7;
+      border: 2px solid #00fff7;
+      box-shadow: 0 0 15px rgba(0,255,247,0.3);
+    }
+
+    .notification.error {
+      background: #331f1f;
+      color: #ff4747;
+      border: 2px solid #ff4747;
+      box-shadow: 0 0 15px rgba(255, 71, 71, 0.3);
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+
     /* Responsive adjustments */
-    @media (max-width: 1200px) {
-      nav ul {
-        gap: 8px;
-      }
-      
-      nav ul li a {
-        font-size: 0.88rem;
-        padding: 4px 7px;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      nav ul li a {
-        font-size: 0.86rem;
-        padding: 4px 6px;
-      }
-      
-      .contact-methods {
-        gap: 35px;
-      }
-    }
-
     @media (max-width: 768px) {
       .menu-toggle {
         display: block;
@@ -371,41 +399,11 @@
         min-width: 80px;
       }
       
-      .copyright {
-        padding: 20px 15px;
-        font-size: 0.85rem;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .contact-methods {
-        gap: 20px;
-      }
-      
-      .contact-method i {
-        font-size: 2.8rem;
-      }
-      
-      .contact-method span {
-        font-size: 1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      nav .logo {
-        font-size: 1.2rem;
-      }
-      
-      .contact-methods {
-        gap: 15px;
-      }
-      
-      .contact-method {
-        min-width: 70px;
-      }
-      
-      .contact-method i {
-        font-size: 2.5rem;
+      .notification {
+        top: 80px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
       }
     }
   </style>
@@ -426,7 +424,7 @@
       <li><a href="Projects.html">Projects</a></li>
       <li><a href="Resume.html">Resume</a></li>
       <li><a href="Education.html">Education</a></li>
-      <li><a href="Contacts.html" class="active">Contact</a></li>
+      <li><a href="Contacts.html" class="active">Contactss</a></li>
     </ul>
   </nav>
 
@@ -437,30 +435,30 @@
 
     <!-- MESSAGE FORM -->
     <div class="message-container">
-      <form class="contact-form">
-        <input type="text" placeholder="Your Good Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea rows="10" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
+      <form id="contactForm" class="contact-form">
+        <input type="text" id="from_name" name="from_name" placeholder="Your Good Name" required>
+        <input type="email" id="from_email" name="from_email" placeholder="Your Email" required>
+        <textarea id="message" name="message" rows="10" placeholder="Your Message" required></textarea>
+        <button type="submit" id="submitBtn">Send Message</button>
       </form>
     </div>
 
-    <!-- CONTACT METHODS - NOW WITH TWITTER -->
+    <!-- CONTACT METHODS -->
     <div class="contact-methods">
       <div class="contact-method">
         <i class="fas fa-phone"></i>
         <span>+254758010300</span>
       </div>
       <div class="contact-method">
-        <i class="fab fa-linkedin" onclick="window.open('https://www.linkedin.com/in/muthuimutua01/','_blank')"></i>
+        <i class="fab fa-linkedin" onclick="window.open('https://linkedin.com/in/YOUR-ACTUAL-LINKEDIN','_blank')"></i>
         <span>LinkedIn</span>
       </div>
       <div class="contact-method">
-        <i class="fab fa-twitter" onclick="window.open('https://twitter.com/_babu_official','_blank')"></i>
+        <i class="fab fa-twitter" onclick="window.open('https://twitter.com/YOUR-ACTUAL-TWITTER','_blank')"></i>
         <span>Twitter</span>
       </div>
       <div class="contact-method">
-        <i class="fab fa-github" onclick="window.open('https://github.com/Daniel-Mutua','_blank')"></i>
+        <i class="fab fa-github" onclick="window.open('https://github.com/YOUR-ACTUAL-GITHUB','_blank')"></i>
         <span>GitHub</span>
       </div>
     </div>
@@ -474,32 +472,74 @@
       <span class="heart">❤</span> 
       Built with passion and dedication.
       <br>
-      <a href="mailto:contact@danielmutua.com">contact@muthuimutua00@gmail.com</a>
+      <a href="mailto:your-email@example.com">your-email@example.com</a>
     </p>
   </footer>
 
   <script>
+    // Initialize EmailJS with your Public Key
+    // REPLACE 'YOUR_PUBLIC_KEY' with your actual EmailJS Public Key
+    emailjs.init('2YJIF6ZIaDq9z6Az2');
+
     // Form submission handler
-    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
-      // Get form values
-      const name = this.querySelector('input[type="text"]').value;
-      const email = this.querySelector('input[type="email"]').value;
-      const message = this.querySelector('textarea').value;
+      const submitBtn = document.getElementById('submitBtn');
+      const originalText = submitBtn.textContent;
       
-      // Simple validation
-      if (name && email && message) {
-        // In a real application, you would send this data to a server
-        // For now, just show an alert
-        alert(`Thank you, ${name}! Your message has been sent. I'll get back to you soon at ${email}.`);
+      // Show loading state
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending';
+      
+      // Send email using EmailJS
+      emailjs.sendForm(
+        'service_qch5wsi',     // Replace with your EmailJS Service ID
+        'template_97jbnk9',    // Replace with your EmailJS Template ID
+        this
+      )
+      .then(function() {
+        // Success
+        showNotification('Message sent successfully!', 'success');
         
         // Reset form
-        this.reset();
-      } else {
-        alert('Please fill in all fields before submitting.');
-      }
+        document.getElementById('contactForm').reset();
+      }, function(error) {
+        // Error
+        showNotification('Failed to send message. Please try again.', 'error');
+        console.error('EmailJS Error:', error);
+      })
+      .finally(function() {
+        // Reset button state
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      });
     });
+
+    // Notification function
+    function showNotification(message, type) {
+      // Remove any existing notifications
+      const existingNotifications = document.querySelectorAll('.notification');
+      existingNotifications.forEach(notification => notification.remove());
+      
+      // Create notification
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+        <span>${message}</span>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // Remove notification after 5 seconds
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+      }, 5000);
+    }
 
     // Make phone number clickable on mobile
     document.querySelector('.fa-phone').addEventListener('click', function() {
@@ -546,23 +586,6 @@
         * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
       `;
       document.head.appendChild(style);
-    });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId !== '#') {
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 80,
-              behavior: 'smooth'
-            });
-          }
-        }
-      });
     });
   </script>
 
