@@ -1,138 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Daniel Mutua - Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        /* ===== GOOGLE FONTS ===== */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+  <meta charset="UTF-8">
+  <title>Daniel Mutua — Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: black;
+      color: #c5c6c7;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
 
-        /* ===== RESET ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+    /* Hacker rain canvas */
+    #matrix {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      background: black;
+    }
 
-        body {
-            background: linear-gradient(135deg, #1e1e2f, #23243a, #1d3557);
-            color: #fff;
-            overflow-x: hidden;
-        }
+    /* --- First Page Container: Sidebar + About Me --- */
+    .first-page-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .first-page-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 50px;
+      background: rgba(31,40,51,0.85);
+      border-radius: 12px;
+      padding: 50px;
+      box-shadow: 0 0 40px rgba(0,255,255,0.3);
+      border: 1px solid rgba(0,255,255,0.2);
+      max-width: 1000px;
+      width: 100%;
+      backdrop-filter: blur(5px);
+    }
 
-        /* ===== HEADER ===== */
-        header {
-            text-align: center;
-            padding: 60px 20px;
-            animation: fadeIn 2s ease-in-out;
-        }
+    /* Sidebar */
+    .sidebar-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 280px;
+      text-align: center;
+    }
+    .profile-pic {
+      width:160px; height:160px;
+      border-radius:50%;
+      border:4px solid #00fff7;
+      object-fit:cover;
+      box-shadow:0 0 30px rgba(0,255,247,0.4);
+      margin-bottom:20px;
+      transition: transform 0.4s ease;
+    }
+    .profile-pic:hover { transform: scale(1.05); }
 
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #4cc9f0;
-            box-shadow: 0 0 20px #4cc9f0;
-            animation: float 4s infinite ease-in-out;
-        }
+    h1 {
+      font-size:2rem;
+      color:#00fff7;
+      letter-spacing:2px;
+      margin-bottom:10px;
+    }
+    p.subtitle { font-size:1rem; opacity:0.85; margin-bottom:25px; color:#66fcf1; }
 
-        header h1 {
-            font-size: 2.8rem;
-            margin-top: 20px;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
+    .sidebar-nav {
+      display:flex;
+      flex-direction: column;
+      gap:15px;
+      width: 100%;
+    }
+    .sidebar-nav a {
+      padding:12px 20px;
+      border:1px solid #00fff7;
+      border-radius:8px;
+      color:#00fff7;
+      transition: 0.3s;
+      backdrop-filter: blur(5px);
+      background: rgba(0,255,247,0.05);
+      text-align: center;
+    }
+    .sidebar-nav a:hover {
+      background:#00fff7; color:black;
+      transform:translateY(-2px);
+      box-shadow:0 0 25px rgba(0,255,247,0.8), 0 0 60px rgba(0,255,247,0.4);
+    }
 
-        header p {
-            font-size: 1.2rem;
-            margin-top: 10px;
-            opacity: 0.9;
-        }
-
-        /* ===== NAVIGATION ===== */
-        nav {
-            margin: 40px auto;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            border-radius: 12px;
-            text-decoration: none;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            background: #4cc9f0;
-            color: #000;
-            transform: translateY(-5px);
-            box-shadow: 0 4px 20px #4cc9f0;
-        }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-            100% { transform: translateY(0); }
-        }
-
-        /* ===== DECORATIVE GLOW ORBS ===== */
-        .orb {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #4cc9f055, transparent);
-            filter: blur(70px);
-            border-radius: 50%;
-            animation: moveOrb 15s infinite ease-in-out;
-            z-index: -1;
-        }
-
-        .orb:nth-child(1) { top: 10%; left: 5%; }
-        .orb:nth-child(2) { bottom: 5%; right: 10%; animation-delay: 5s; }
-
-        @keyframes moveOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(40px, -30px) scale(1.2); }
-            100% { transform: translate(0, 0) scale(1); }
-        }
-    </style>
+    /* About Me Section */
+    .about-me {
+      flex: 1;
+      min-width: 280px;
+    }
+    .about-me h2 {
+      color: #00fff7;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+    .about-me p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+    .about-me strong { color: #00fff7; }
+  </style>
 </head>
 <body>
 
-    <!-- Background glowing elements -->
-    <div class="orb"></div>
-    <div class="orb"></div>
+  <!-- Hacker rain canvas -->
+  <canvas id="matrix"></canvas>
 
-    <header>
-        <img src="images/my-photo.jpg" alt="DANIEL MUTUA's Photo" class="profile-pic">
+  <!-- Page 1: Sidebar + About Me -->
+  <div class="first-page-wrapper">
+    <div class="first-page-container">
+
+      <!-- Sidebar -->
+      <div class="sidebar-container">
+        <img src="images/my-photo.jpg" alt="Daniel Mutua" class="profile-pic">
         <h1>DANIEL MUTUA</h1>
-        <p>Cybersecurity Enthusiast | Developer | Problem Solver</p>
-    </header>
+        <p class="subtitle">Cybersecurity Enthusiast • Developer • Problem Solver</p>
+        <div class="sidebar-nav">
+          <a href="Skills.html">Skills</a>
+          <a href="projects.html">Projects</a>
+          <a href="resume.html">Resume</a>
+          <a href="education.html">Education</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
 
-    <nav>
-        <a href="resume.html">Resume</a>
-        <a href="projects.html">Projects</a>
-        <a href="lab-challenges.html">Lab Challenges</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+      <!-- About Me -->
+      <div class="about-me">
+        <h2>About Me</h2>
+        <p>
+          I specialize in <strong>cybersecurity</strong> and <strong>networking</strong>, designing secure systems and reliable infrastructures that perform seamlessly. In <strong>Internet of Things (IoT)</strong>, I develop connected solutions integrating smart devices and data efficiently.
+        </p>
+        <p>
+          Additionally, I am experienced in full-stack development: crafting responsive <strong>front-end</strong> interfaces, building scalable <strong>back-end</strong> systems, and managing <strong>databases</strong> to ensure secure and organized data. My goal is to create practical, maintainable, and impactful technology solutions.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%';
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+
+    for(let x = 0; x < columns; x++) {
+      drops[x] = 1;
+    }
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#00fff7';
+      ctx.font = fontSize + 'px monospace';
+
+      for(let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 50);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 
 </body>
 </html>
