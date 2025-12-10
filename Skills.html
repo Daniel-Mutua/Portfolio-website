@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Skills — Daniel Mutua</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* ---------------- BODY ---------------- */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0b0c10;
+      color: #c5c6c7;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* ---------------- NAVBAR - OPTIMIZED FOR ALL LINKS ---------------- */
+    nav {
+      width: 100%;
+      background: rgba(11,12,16,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,255,247,0.3);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      padding: 12px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 20px rgba(0,255,247,0.3);
+      box-sizing: border-box;
+    }
+
+    nav .logo {
+      color: #00fff7;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 10px; /* Reduced gap to fit all links */
+      margin: 0;
+      padding: 0;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    nav ul::-webkit-scrollbar {
+      display: none;
+    }
+
+    nav ul li {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    nav ul li a {
+      color: #00fff7;
+      text-decoration: none;
+      font-size: 0.92rem; /* Slightly smaller font */
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 5px 8px; /* Reduced padding */
+      border-radius: 4px;
+      border: 1px solid transparent;
+      display: inline-block;
+    }
+
+    nav ul li a:hover {
+      color: #0b0c10;
+      background-color: #00fff7;
+      box-shadow: 0 0 8px rgba(0,255,247,0.7);
+      text-shadow: none;
+      border: 1px solid #00fff7;
+    }
+
+    /* Active link styling */
+    nav ul li a.active {
+      color: #00fff7;
+      border-bottom: 2px solid #00fff7;
+      padding-bottom: 3px;
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      color: #00fff7;
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 5px;
+    }
+
+    /* ---------------- CONTAINER ---------------- */
+    .container {
+      max-width: 900px;
+      margin: 90px auto 40px auto;
+      padding: 30px;
+      background: rgba(31,40,51,0.95);
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0,255,247,0.2);
+      border: 1px solid rgba(0,255,247,0.2);
+      backdrop-filter: blur(5px);
+      box-sizing: border-box;
+    }
+
+    .container h2 {
+      font-size: 2.2rem;
+      color: #00fff7;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .container p {
+      font-size: 1.1rem;
+      color: #c5c6c7;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .skills-grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .skill-card {
+      perspective: 1000px;
+      cursor: pointer;
+      height: 240px;
+      position: relative;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      border-radius: 12px;
+      z-index: 1;
+    }
+
+    .card-inner.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-inner::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 25px;
+      height: 25px;
+      border-top-left-radius: 0;
+      border-bottom-right-radius: 25px;
+      background: linear-gradient(135deg, #00fff7, #0ff);
+      box-shadow: 0 0 8px #00fff7, 0 0 16px #00fff7, 0 0 24px #00fff7;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      padding: 25px;
+      box-sizing: border-box;
+    }
+
+    .card-front {
+      background-color: #0b0c10;
+      box-shadow: 0 8px 25px rgba(0,255,247,0.2);
+      border: 1px solid rgba(0,255,247,0.1);
+    }
+
+    .card-front:hover {
+      box-shadow: 0 12px 35px rgba(0,255,247,0.3);
+      transform: translateY(-5px);
+      transition: all 0.3s ease;
+    }
+
+    .card-back {
+      background-color: #1f2833;
+      border: 2px solid #00fff7;
+      transform: rotateY(180deg);
+      text-align: left;
+      color: #c5c6c7;
+    }
+
+    .icon {
+      font-size: 3em;
+      color: #00fff7;
+      margin-bottom: 15px;
+      padding: 12px;
+      background-color: #0b0c10;
+      border-radius: 50%;
+    }
+
+    .card-title {
+      font-size: 1em;
+      font-weight: bold;
+      color: #00fff7;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .card-back ul {
+      padding-left: 15px;
+      margin: 0;
+    }
+
+    .card-back li {
+      color: #c5c6c7;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      nav ul {
+        gap: 8px;
+      }
+      
+      nav ul li a {
+        font-size: 0.88rem;
+        padding: 4px 7px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      nav ul li a {
+        font-size: 0.86rem;
+        padding: 4px 6px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      
+      nav {
+        padding: 10px 15px;
+        flex-wrap: wrap;
+      }
+      
+      nav ul {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(0,255,247,0.2);
+        overflow-x: visible;
+      }
+      
+      nav ul.active {
+        display: flex;
+      }
+      
+      nav ul li {
+        width: 100%;
+      }
+      
+      nav ul li a {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.95rem;
+      }
+      
+      .container {
+        margin: 100px 15px 30px 15px;
+        padding: 20px;
+      }
+      
+      .skills-grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav .logo {
+        font-size: 1.2rem;
+      }
+      
+      .skills-grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR WITH ALL LINKS INCLUDING PROJECTS -->
+  <nav>
+    <div class="logo">Daniel Mutua</div>
+    
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <ul id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#overview" class="active">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contacts">Contacts</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONTENT -->
+  <section class="container" id="overview">
+    <h2>SKILLS</h2>
+    <p>I create secure, scalable, and efficient digital solutions across web development, IoT, and cybersecurity. My work focuses on delivering clean, maintainable systems that perform reliably in real-world environments while solving complex technical challenges with clarity and precision.</p>
+
+    <div class="skills-grid-container">
+
+      <!-- Cybersecurity Card -->
+      <div class="skill-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <i class="fas fa-shield-alt icon"></i>
+            <div class="card-title">Cybersecurity</div>
+          </div>
+          <div class="card-back">
+            <ul>
+              <li>Ethical Hacking</li>
+              <li>Vulnerability Scanning</li>
+              <li>Penetration Testing</li>
+              <li>Network and Database Security</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Networking Card -->
+      <div class="skill-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <i class="fas fa-network-wired icon"></i>
+            <div class="card-title">Networking</div>
+          </div>
+          <div class="card-back">
+            <ul>
+              <li>LAN/WAN Design</li>
+              <li>Router & Switch Configuration</li>
+              <li>Network Troubleshooting</li>
+              <li>VPN & Firewall Setup</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- IoT Card -->
+      <div class="skill-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <i class="fas fa-microchip icon"></i>
+            <div class="card-title">IoT</div>
+          </div>
+          <div class="card-back">
+            <ul>
+              <li>Sensor Integration</li>
+              <li>Device Programming</li>
+              <li>Data Monitoring</li>
+              <li>Smart Home Automation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Front-end Development Card -->
+      <div class="skill-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <i class="fas fa-desktop icon"></i>
+            <div class="card-title">Front-end Development</div>
+          </div>
+          <div class="card-back">
+            <ul>
+              <li>HTML, CSS, JavaScript</li>
+              <li>React & Vue.js</li>
+              <li>Responsive Design</li>
+              <li>UI/UX Principles</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Back-end Development Card -->
+      <div class="skill-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <i class="fas fa-server icon"></i>
+            <div class="card-title">Back-end Development</div>
+          </div>
+          <div class="card-back">
+            <ul>
+              <li>Node.js & Express</li>
+              <li>Python & Django</li>
+              <li>REST & GraphQL APIs</li>
+              <li>Server & Application Management</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Database Management Card -->
+      <div class="skill-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <i class="fas fa-database icon"></i>
+            <div class="card-title">Database Management</div>
+          </div>
+          <div class="card-back">
+            <ul>
+              <li>MySQL & PostgreSQL</li>
+              <li>MongoDB & NoSQL</li>
+              <li>Database Optimization</li>
+              <li>Backup & Recovery</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    // Flip cards functionality
+    const cards = document.querySelectorAll('.skill-card');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        card.querySelector('.card-inner').classList.toggle('flipped');
+      });
+    });
+
+    // Set active nav link
+    const navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        navLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link (for mobile)
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          navMenu.classList.remove('active');
+        }
+      });
+    });
+
+    // Close menu when clicking outside (for mobile)
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && 
+          !navMenu.contains(e.target) && 
+          !menuToggle.contains(e.target)) {
+        navMenu.classList.remove('active');
+      }
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId !== '#') {
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
