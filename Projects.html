@@ -1,22 +1,650 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Projects - Brian Kibet</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Daniel Mutua</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: #0b0c10;
+      color: #c5c6c7;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00fff7;
+      margin-top: 100px;
+      font-size: 2.8rem;
+      text-shadow: 0 0 10px rgba(0,255,247,0.3);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #c5c6c7;
+      margin-bottom: 50px;
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 20px;
+      line-height: 1.6;
+    }
+
+    /* NAVBAR */
+    nav {
+      width: 100%;
+      background: rgba(11,12,16,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,255,247,0.3);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 20px rgba(0,255,247,0.3);
+      box-sizing: border-box;
+    }
+
+    nav .logo {
+      color: #00fff7;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    nav ul::-webkit-scrollbar {
+      display: none;
+    }
+
+    nav ul li {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    nav ul li a {
+      color: #00fff7;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 5px 8px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      display: inline-block;
+    }
+
+    nav ul li a:hover {
+      color: #0b0c10;
+      background-color: #00fff7;
+      box-shadow: 0 0 8px rgba(0,255,247,0.7);
+      text-shadow: none;
+      border: 1px solid #00fff7;
+    }
+
+    nav ul li a.active {
+      color: #00fff7;
+      border-bottom: 2px solid #00fff7;
+      padding-bottom: 3px;
+    }
+
+    .menu-toggle {
+      display: none;
+      color: #00fff7;
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 5px;
+    }
+
+    /* PROJECT GRID */
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 40px;
+      padding: 40px;
+      width: 100%;
+      max-width: 1300px;
+      margin: auto;
+      margin-top: 30px;
+    }
+
+    /* CARD STYLING */
+    .project-card {
+      background: #1f2833;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,255,247,0.2);
+      border: 1px solid rgba(0,255,247,0.2);
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 0 35px rgba(0,255,247,0.5);
+      transform: perspective(900px) rotateY(var(--rotateY)) rotateX(var(--rotateX)) translateY(-10px);
+    }
+
+    /* TOP-RIGHT GITHUB ICON */
+    .github-icon {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.8rem;
+      color: #00fff7;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 20;
+      background: rgba(11,12,16,0.8);
+      padding: 8px;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .github-icon:hover {
+      color: #0ff;
+      transform: scale(1.15);
+      text-shadow: 0 0 15px #00fff7;
+      background: rgba(0,255,247,0.1);
+    }
+
+    /* CARD IMAGE */
+    .project-image {
+      width: 100%;
+      height: 210px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(0,255,247,0.2);
+      border: 1px solid rgba(0,255,247,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .project-image {
+      transform: scale(1.02);
+    }
+
+    /* TITLE */
+    .project-title {
+      font-size: 1.4rem;
+      color: #00fff7;
+      margin-bottom: 10px;
+      text-align: center;
+      font-weight: 600;
+      text-shadow: 0 0 5px rgba(0,255,247,0.3);
+    }
+
+    /* DESCRIPTION */
+    .project-description {
+      font-size: 1rem;
+      color: #c5c6c7;
+      line-height: 1.45;
+      text-align: center;
+      padding: 0 10px;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* TECH TAGS */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 15px;
+      padding: 0 10px;
+    }
+
+    .tech-tag {
+      background: rgba(0,255,247,0.1);
+      color: #00fff7;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(0,255,247,0.3);
+    }
+
+    /* ICON CONTAINER for GSM projects */
+    .icon-container {
+      width: 100%;
+      height: 210px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0b0c10, #1f2833);
+      box-shadow: 0 0 15px rgba(0,255,247,0.2);
+      border: 2px solid rgba(0,255,247,0.3);
+    }
+
+    /* Single icon styling */
+    .project-icon {
+      font-size: 6rem;
+      color: #00fff7;
+      text-shadow: 0 0 20px rgba(0,255,247,0.5);
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover .project-icon {
+      transform: scale(1.1);
+      text-shadow: 0 0 30px rgba(0,255,247,0.8);
+    }
+
+    /* Dual icon container with plus sign */
+    .dual-icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .dual-icon-container .project-icon {
+      font-size: 4.5rem;
+    }
+
+    /* Plus sign between icons */
+    .plus-sign {
+      font-size: 3rem;
+      color: #00fff7;
+      margin: 0 10px;
+      text-shadow: 0 0 15px rgba(0,255,247,0.5);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .project-card {
+        height: 540px;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+        margin-top: 120px;
+      }
+      
+      .projects-container {
+        padding: 20px;
+        gap: 25px;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      nav {
+        padding: 10px 15px;
+        flex-wrap: wrap;
+      }
+      
+      nav ul {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(0,255,247,0.2);
+        overflow-x: visible;
+      }
+      
+      nav ul.active {
+        display: flex;
+      }
+      
+      nav ul li {
+        width: 100%;
+      }
+      
+      nav ul li a {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.95rem;
+      }
+
+      .project-icon {
+        font-size: 5rem;
+      }
+
+      .dual-icon-container .project-icon {
+        font-size: 4rem;
+      }
+
+      .plus-sign {
+        font-size: 2.5rem;
+        margin: 0 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+      
+      .projects-container {
+        grid-template-columns: 1fr;
+        padding: 15px;
+      }
+
+      .project-icon {
+        font-size: 4.5rem;
+      }
+
+      .dual-icon-container .project-icon {
+        font-size: 3.5rem;
+      }
+
+      .plus-sign {
+        font-size: 2rem;
+        margin: 0 6px;
+      }
+
+      .dual-icon-container {
+        gap: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Projects</h1>
-    <div class="project">
-        <h3>Web Vulnerability Scanner</h3>
-        <p>Developed a tool to identify common web vulnerabilities using Python.</p>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">Daniel Mutua</div>
+    
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <ul id="navMenu">
+      <li><a href="index.html">index.html</a></li>
+      <li><a href="Skills.html">Skills.html</a></li>
+      <li><a href="Projects.html" class="active">Projects.html</a></li>
+      <li><a href="Resume.html">Resume.html</a></li>
+      <li><a href="Education.html">Education.html</a></li>
+      <li><a href="Contacts.html">Contacts.html</a></li>
+    </ul>
+  </nav>
+
+  <h1>My Projects</h1>
+  <div class="subtitle">Building innovative solutions across IoT, cybersecurity, web development, and embedded systems</div>
+
+  <div class="projects-container">
+
+    <!-- 1. Bee Monitoring System -->
+    <div class="project-card" data-tilt>
+      <i class="fab fa-github github-icon" onclick="window.open('https://github.com/Daniel-Mutua/Acoustic-Bee-Monitoring-System','_blank')"></i>
+      <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=600&q=80" 
+           class="project-image" 
+           alt="ESP32 with microphone sensor setup"
+           loading="lazy">
+      <div class="project-title">Acoustic Bee Monitoring IoT System</div>
+      <div class="project-description">
+        Real-time bee hive monitoring using ESP32, sound sensors, and SMTP alerts with a responsive web dashboard.
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">IoT</span>
+        <span class="tech-tag">ESP32</span>
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Web Dashboard</span>
+      </div>
     </div>
-    <div class="project">
-        <h3>Portfolio Website</h3>
-        <p>This site showcasing my CV, projects, and lab challenges.</p>
+
+    <!-- 2. Node.js Backend API -->
+    <div class="project-card" data-tilt>
+      <i class="fab fa-github github-icon" onclick="window.open('https://github.com/YOUR_REPO_2','_blank')"></i>
+      <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=600&q=80" 
+           class="project-image" 
+           alt="Node.js API code"
+           loading="lazy">
+      <div class="project-title">Node.js REST API + Database</div>
+      <div class="project-description">
+        Scalable backend server with Node.js, Express, MongoDB featuring JWT authentication and RESTful endpoints.
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">Node.js</span>
+        <span class="tech-tag">Express</span>
+        <span class="tech-tag">MongoDB</span>
+        <span class="tech-tag">JWT</span>
+      </div>
     </div>
-    <div class="project">
-        <h3>Encryption-Decryption CLI Tool</h3>
-        <p>CLI tool using Caesar and AES algorithms.</p>
+
+    <!-- 3. GSM Auto Caller - NOW WITH PHONE ICON -->
+    <div class="project-card" data-tilt>
+      <i class="fab fa-github github-icon" onclick="window.open('https://github.com/Daniel-Mutua/Curly-Octo-winner','_blank')"></i>
+      <div class="icon-container">
+        <i class="fas fa-phone-alt project-icon"></i>
+      </div>
+      <div class="project-title">GSM Auto Caller (Arduino + NodeMCU)</div>
+      <div class="project-description">
+        Automated phone calling system using Arduino, GSM modules, and NodeMCU for remote triggering capabilities.
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">Arduino</span>
+        <span class="tech-tag">GSM</span>
+        <span class="tech-tag">NodeMCU</span>
+        <span class="tech-tag">Automation</span>
+      </div>
     </div>
+
+    <!-- 4. Arduino SMS API - KEEPING REAL IMAGE -->
+    <div class="project-card" data-tilt>
+      <i class="fab fa-github github-icon" onclick="window.open('https://github.com/Daniel-Mutua/jubilant-octo-lamp','_blank')"></i>
+      <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80" 
+           class="project-image" 
+           alt="Arduino SMS system"
+           loading="lazy">
+      <div class="project-title">SMS Movers API — Arduino SMS Sender</div>
+      <div class="project-description">
+        SMS messaging system using Arduino web server and SMS Movers API with modern web interface for control.
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">Arduino</span>
+        <span class="tech-tag">SMS API</span>
+        <span class="tech-tag">Web Server</span>
+        <span class="tech-tag">C++</span>
+      </div>
+    </div>
+
+    <!-- 5. Web Application -->
+    <div class="project-card" data-tilt>
+      <i class="fab fa-github github-icon" onclick="window.open('https://github.com/Daniel-Mutua/Portfolio-website','_blank')"></i>
+      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" 
+           class="project-image" 
+           alt="Web development code"
+           loading="lazy">
+      <div class="project-title">Interactive Web UI Application</div>
+      <div class="project-description">
+        Modern web application with dynamic UI elements, animations, and interactive features using pure JavaScript.
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">HTML/CSS</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">UI/UX</span>
+        <span class="tech-tag">Frontend</span>
+      </div>
+    </div>
+
+    <!-- 6. GSM SMS Alerts - KEEPING REAL IMAGE -->
+    <div class="project-card" data-tilt>
+      <i class="fab fa-github github-icon" onclick="window.open('https://github.com/Daniel-Mutua/potential-rotary-phone','_blank')"></i>
+      <img src="https://images.unsplash.com/photo-1587560699334-cc4ff634909a?auto=format&fit=crop&w=600&q=80" 
+           class="project-image" 
+           alt="Mobile communication"
+           loading="lazy">
+      <div class="project-title">GSM SMS Alerts (NodeMCU)</div>
+      <div class="project-description">
+        Sensor-triggered SMS alert system using NodeMCU and GSM modules for remote monitoring and notifications.
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">NodeMCU</span>
+        <span class="tech-tag">GSM</span>
+        <span class="tech-tag">SMS</span>
+        <span class="tech-tag">Alerts</span>
+      </div>
+    </div>
+
+    <!-- 7. Arduino Email Sender - KEEPING REAL IMAGE -->
+    <div class="project-card" data-tilt>
+      <i class="fab fa-github github-icon" onclick="window.open('https://github.com/Daniel-Mutua/Arduino_Email_SMTP_Testing','_blank')"></i>
+      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" 
+           class="project-image" 
+           alt="Email notification system"
+           loading="lazy">
+      <div class="project-title">Arduino Email Sender + Web UI</div>
+      <div class="project-description">
+        IoT email notification system using Arduino/ESP32 with SMTP protocol and local web control interface.
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">Arduino</span>
+        <span class="tech-tag">SMTP</span>
+        <span class="tech-tag">ESP32</span>
+        <span class="tech-tag">Email</span>
+      </div>
+    </div>
+
+    <!-- 8. Cybersecurity Tool -->
+    <div class="project-card" data-tilt>
+      <i class="fab fa-github github-icon" onclick="window.open('https://github.com/YOUR_REPO_8','_blank')"></i>
+      <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" 
+           class="project-image" 
+           alt="Cybersecurity concept"
+           loading="lazy">
+      <div class="project-title">Cybersecurity Vulnerability Scanner</div>
+      <div class="project-description">
+        Network security scanner for vulnerability detection, port scanning, and security configuration analysis.
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">Cybersecurity</span>
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Network</span>
+        <span class="tech-tag">Security</span>
+      </div>
+    </div>
+
+    <!-- 9. GSM SMS + Call Automation - WITH PLUS SIGN -->
+    <div class="project-card" data-tilt>
+      <i class="fab fa-github github-icon" onclick="window.open('https://github.com/Daniel-Mutua/bug-free-train','_blank')"></i>
+      <div class="icon-container">
+        <div class="dual-icon-container">
+          <i class="fas fa-phone-alt project-icon"></i>
+          <span class="plus-sign">+</span>
+          <i class="fas fa-sms project-icon"></i>
+        </div>
+      </div>
+      <div class="project-title">GSM SMS + Call Automation</div>
+      <div class="project-description">
+        Dual-function communication system for automated SMS and voice calls using Arduino and GSM technology.
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">Arduino</span>
+        <span class="tech-tag">GSM</span>
+        <span class="tech-tag">Automation</span>
+        <span class="tech-tag">Communication</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    /* TILT EFFECT SCRIPT */
+    document.querySelectorAll("[data-tilt]").forEach(card => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateY = ((x / rect.width) - 0.5) * 25;
+        const rotateX = ((y / rect.height) - 0.5) * -25;
+
+        card.style.setProperty("--rotateY", rotateY + "deg");
+        card.style.setProperty("--rotateX", rotateX + "deg");
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.setProperty("--rotateY", "0deg");
+        card.style.setProperty("--rotateX", "0deg");
+      });
+    });
+
+    /* Mobile menu toggle */
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Set active nav link
+    const navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        navLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Close mobile menu after clicking
+        if (window.innerWidth <= 768) {
+          navMenu.classList.remove('active');
+        }
+      });
+    });
+
+    // Close menu when clicking outside (for mobile)
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && 
+          !navMenu.contains(e.target) && 
+          !menuToggle.contains(e.target)) {
+        navMenu.classList.remove('active');
+      }
+    });
+
+    // Preload images for better performance
+    window.addEventListener('load', function() {
+      const images = document.querySelectorAll('.project-image');
+      images.forEach(img => {
+        const src = img.getAttribute('src');
+        const preload = new Image();
+        preload.src = src;
+      });
+    });
+  </script>
+
 </body>
 </html>
