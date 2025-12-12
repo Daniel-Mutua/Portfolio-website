@@ -27,53 +27,58 @@
       line-height: 1.6;
     }
 
-    /* Fixed Top Navigation Bar */
+    /* UPDATED NAVBAR TO MATCH PROJECTS PAGE */
     .navbar {
+      width: 100%;
+      background: rgba(11,12,16,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,255,247,0.3);
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      background: rgba(11, 12, 16, 0.95);
-      backdrop-filter: blur(10px);
-      padding: 15px 40px;
+      z-index: 9999;
+      padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 9999;
-      border-bottom: 2px solid #00fff7;
-      box-shadow: 0 5px 20px rgba(0, 255, 247, 0.15);
+      box-shadow: 0 0 20px rgba(0,255,247,0.3);
+      box-sizing: border-box;
     }
 
-    /* Left side: Brand + Social Icons */
+    /* Left side: Brand */
     .navbar-left {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 10px;
     }
 
     .navbar-brand {
+      color: #00fff7;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      margin-right: 15px;
+      flex-shrink: 0;
+      text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 10px;
-      color: #00fff7;
-      font-size: 1.5rem;
-      font-weight: 700;
-      text-decoration: none;
+      gap: 8px;
     }
 
     .navbar-brand i {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
     }
 
     /* Social icons styling - NOW ON LEFT */
     .social-icons {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
 
     .social-icons a {
-      width: 38px;
-      height: 38px;
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
       background: #1f2833;
       display: flex;
@@ -81,7 +86,7 @@
       justify-content: center;
       color: #00fff7;
       text-decoration: none;
-      font-size: 1.1rem;
+      font-size: 1rem;
       border: 1px solid rgba(0, 255, 247, 0.2);
       transition: all 0.3s ease;
       position: relative;
@@ -106,63 +111,56 @@
     .social-icons a:hover {
       background: #00fff7;
       color: #0b0c10;
-      transform: translateY(-3px);
-      box-shadow: 0 0 15px rgba(0, 255, 247, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 0 12px rgba(0, 255, 247, 0.5);
     }
 
-    /* Navigation Menu Styling - NOW ON RIGHT */
+    /* Navigation Menu Styling - MATCHING PROJECTS PAGE */
     #navMenu {
-      display: flex;
       list-style: none;
-      gap: 20px;
+      display: flex;
+      gap: 10px;
       margin: 0;
       padding: 0;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    #navMenu::-webkit-scrollbar {
+      display: none;
     }
 
     #navMenu li {
-      display: inline-block;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     #navMenu a {
-      color: #c5c6c7;
+      color: #00fff7;
       text-decoration: none;
+      font-size: 0.92rem;
       font-weight: 500;
-      padding: 8px 16px;
-      border-radius: 6px;
       transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      font-size: 0.95rem;
-    }
-
-    #navMenu a::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 2px;
-      background: #00fff7;
-      transition: width 0.3s ease;
+      padding: 5px 8px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      display: inline-block;
     }
 
     #navMenu a:hover {
-      color: #00fff7;
-    }
-
-    #navMenu a:hover::before {
-      width: 80%;
+      color: #0b0c10;
+      background-color: #00fff7;
+      box-shadow: 0 0 8px rgba(0,255,247,0.7);
+      text-shadow: none;
+      border: 1px solid #00fff7;
     }
 
     #navMenu a.active {
       color: #00fff7;
-      background: rgba(0, 255, 247, 0.1);
-    }
-
-    #navMenu a.active::before {
-      width: 80%;
-      background: #00fff7;
+      border-bottom: 2px solid #00fff7;
+      padding-bottom: 3px;
     }
 
     /* Mobile Menu Button */
@@ -517,21 +515,7 @@
       font-size: 1rem;
     }
 
-    /* Responsive Design */
-    @media (max-width: 992px) {
-      #navMenu {
-        gap: 15px;
-      }
-      
-      .navbar {
-        padding: 15px 20px;
-      }
-      
-      .navbar-left {
-        gap: 15px;
-      }
-    }
-
+    /* RESPONSIVE DESIGN - UPDATED TO MATCH PROJECTS PAGE */
     @media (max-width: 768px) {
       .menu-toggle {
         display: flex;
@@ -539,19 +523,20 @@
       
       #navMenu {
         position: fixed;
-        top: 70px;
+        top: 60px;
         left: 0;
         right: 0;
         background: rgba(11, 12, 16, 0.98);
         backdrop-filter: blur(10px);
         flex-direction: column;
-        padding: 20px;
+        padding: 15px;
         border-bottom: 2px solid #00fff7;
         transform: translateY(-100%);
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
         gap: 0;
+        overflow-x: visible;
       }
       
       #navMenu.active {
@@ -566,11 +551,12 @@
       }
       
       #navMenu a {
-        padding: 15px;
+        padding: 12px;
         text-align: center;
         border-bottom: 1px solid rgba(255,255,255,0.1);
         display: block;
         width: 100%;
+        font-size: 0.95rem;
       }
       
       #navMenu a:last-child {
@@ -579,15 +565,6 @@
       
       .social-icons {
         display: none; /* Hide social icons on mobile menu */
-      }
-      
-      .mobile-social-icons {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin-top: 20px;
-        padding-top: 20px;
-        border-top: 1px solid rgba(255,255,255,0.1);
       }
       
       .content {
@@ -634,13 +611,13 @@
       }
       
       .social-icons a {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
       }
       
-      .navbar-left {
-        gap: 10px;
+      .navbar {
+        padding: 10px 15px;
       }
     }
 
@@ -672,16 +649,16 @@
 </head>
 <body>
 
-  <!-- Fixed Navigation Bar with REVERSED Layout -->
+  <!-- UPDATED NAVBAR TO MATCH PROJECTS PAGE -->
   <nav class="navbar">
     <!-- Left side: Brand + Social Icons -->
     <div class="navbar-left">
       <a href="index.html" class="navbar-brand">
         <i class="fas fa-code"></i>
-        <span>MUTHUI</span>
+        <span>Daniel Mutua</span>
       </a>
       
-      <!-- Social icons moved to LEFT next to brand -->
+      <!-- Social icons on left next to brand -->
       <div class="social-icons">
         <a href="https://www.linkedin.com/in/muthuimutua01" target="_blank" title="LinkedIn">
           <i class="fab fa-linkedin-in"></i>
@@ -925,24 +902,6 @@
     menuToggle.addEventListener('click', () => {
       navMenu.classList.toggle('active');
       menuToggle.classList.toggle('active');
-      
-      // Add social icons to mobile menu when open
-      if (navMenu.classList.contains('active')) {
-        // Check if social icons already exist in mobile menu
-        if (!document.querySelector('.mobile-social-icons')) {
-          const mobileSocialIcons = document.createElement('div');
-          mobileSocialIcons.className = 'mobile-social-icons';
-          mobileSocialIcons.innerHTML = `
-            <a href="https://www.linkedin.com/in/muthuimutua01" target="_blank" title="LinkedIn">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a href="https://github.com/Daniel-Mutua" target="_blank" title="GitHub">
-              <i class="fab fa-github"></i>
-            </a>
-          `;
-          navMenu.appendChild(mobileSocialIcons);
-        }
-      }
     });
     
     // Close mobile menu when clicking a link
@@ -968,10 +927,10 @@
       const navbar = document.querySelector('.navbar');
       if (window.scrollY > 50) {
         navbar.style.background = 'rgba(11, 12, 16, 0.98)';
-        navbar.style.boxShadow = '0 5px 20px rgba(0, 255, 247, 0.2)';
+        navbar.style.boxShadow = '0 0 20px rgba(0, 255, 247, 0.4)';
       } else {
-        navbar.style.background = 'rgba(11, 12, 16, 0.95)';
-        navbar.style.boxShadow = '0 5px 20px rgba(0, 255, 247, 0.15)';
+        navbar.style.background = 'rgba(11,12,16,0.97)';
+        navbar.style.boxShadow = '0 0 20px rgba(0,255,247,0.3)';
       }
     });
   </script>
